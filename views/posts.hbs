@@ -41,7 +41,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/users/logout?">Logout
+                        <a class="nav-link" href="https://august-backend.herokuapp.com/users/logout?">Logout
                         </a>
                     </li>
                 </ul>
@@ -70,13 +70,13 @@
                         </span>
 
                     </div>
-                    <form action="/posts/deletepost" method="post">
+                    <form action="https://august-backend.herokuapp.com/posts/deletepost" method="post">
                         <h1 hidden id='username'>{{this.Author}}</h1>
                         <input type="hidden" name="id" value={{this.id}}>
                         <input id="delete_post" type="submit" class="btn btn-info" value="Delete Post" disabled>
                     </form>
 
-                    <form action="/posts/addcomment" method="post">
+                    <form action="https://august-backend.herokuapp.com/posts/addcomment" method="post">
                         <input type="hidden" name="id" value={{this.id}}>
                         <table style='width:100%;'>
                             <tr>
@@ -108,7 +108,7 @@
                     <div class="card-body">
                         <p class="card-text">
                         <h3>
-                            <form action="/posts/createpost" method="post">
+                            <form action="https://august-backend.herokuapp.com/posts/createpost" method="post">
                                 <input type="hidden" name="Author" value={{username}}>
                                 <input type="text" style='width:50%;' name="Post_Title" placeholder="title">
                                 <input type="text" style='width:100%;' name="Description"
