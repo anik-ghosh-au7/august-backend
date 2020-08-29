@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Monthly Test</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script>
+        window.onload = () => {
+
+            var user_name = document.cookie.split(' ')[1].split('=')[1];
+            console.log(user_name);
+            if (document.getElementById('username')) {
+                var username = document.getElementById('username').innerText;
+                console.log(username);
+            }
+            if (username === user_name) document.getElementById('delete_post').disabled = false;
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">POSTS</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/users/logout?">Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav><br />
+
+    <div class="container">
+        <div class="row"></div><br /><br />
+        <div class="row">
+
+            <div class="col-md-8">
+
+                {{#each posts}}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <span>
+                            <h5>Title : {{this.Post_Title}}</h5>
+                        </span>
+                        <p class="card-text">
+                        <h3>Description : {{this.Description}}</h3>
+                        </p>
+                        <span>
+                            <h6>Author : {{this.Author}}</h6>
+                            <h6>Time : {{this.Time}}</h6>
+                        </span>
+
+                    </div>
+                    <form action="/posts/deletepost" method="post">
+                        <h1 hidden id='username'>{{this.Author}}</h1>
+                        <input type="hidden" name="id" value={{this.id}}>
+                        <input id="delete_post" type="submit" class="btn btn-info" value="Delete Post" disabled>
+                    </form>
+
+                    <form action="/posts/addcomment" method="post">
+                        <input type="hidden" name="id" value={{this.id}}>
+                        <table style='width:100%;'>
+                            <tr>
+                                <td>
+                                    <input type="text" style='width:130%;' name="comment_body"
+                                        placeholder="Add your comment....">
+                                </td>
+                                <td>
+                                    <input type="submit" class="btn btn-primary" value="Comment" style="float:right">
+                                </td>
+                            </tr>
+                        </table>
+
+
+                    </form>
+                    <div class="row">
+                        {{#each this.Comments}}
+                        <div class="col-sm-6">
+                            <div class="card text-white bg-secondary mb-3"
+                                style="max-width: 23rem; padding: 10px; margin:10px;">
+                                {{this}}
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/each}}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <p class="card-text">
+                        <h3>
+                            <form action="/posts/createpost" method="post">
+                                <input type="hidden" name="Author" value={{username}}>
+                                <input type="text" style='width:50%;' name="Post_Title" placeholder="title">
+                                <input type="text" style='width:100%;' name="Description"
+                                    placeholder="Your post goes here....">
+                                <input type="submit" class="btn btn-info" value="Submit">
+                            </form>
+                        </h3>
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</body>
+
+</html>
