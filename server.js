@@ -4,10 +4,13 @@ var mongoose = require("mongoose");
 var cookieParser = require("cookie-parser");
 // Connecting to mongodb DataBase
 mongoose
-  .connect("mongodb://localhost:27017/newblog", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://anik:1234@cluster0.9ibrf.mongodb.net/newBlog?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(console.log("Connected to DB"))
   .catch((err) => console.log(err));
 
